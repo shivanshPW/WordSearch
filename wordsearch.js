@@ -369,23 +369,27 @@ function giveHint() {
 function initGame() {
   const categorySelect = document.getElementById("categorySelect");
   const difficultySelect = document.getElementById("difficultySelect");
-  const widthInput = document.getElementById("gridWidth");
-  const heightInput = document.getElementById("gridHeight");
   const wordCountInput = document.getElementById("wordCount");
+
+  // Fixed grid size - always 10x10
+  gridWidth = 10;
+  gridHeight = 10;
+
+  // Limit word count to maximum 10
+  let count = parseInt(wordCountInput.value);
+  if (count > 10) {
+    count = 10;
+    wordCountInput.value = 10;
+  }
+  wordCount = count;
 
   const settings = {
     category: categorySelect.value,
     difficulty: difficultySelect.value,
-    width: parseInt(widthInput.value),
-    height: parseInt(heightInput.value),
-    count: parseInt(wordCountInput.value)
+    count: wordCount
   };
 
   saveConfig("wordsearch", settings);
-
-  gridWidth = settings.width;
-  gridHeight = settings.height;
-  wordCount = settings.count;
 
   let categoryWords = settings.category === "__RANDOM__"
     ? [...new Set(Object.values(allCategories[currentLang]).flat())]
@@ -492,11 +496,6 @@ function arraysEqual(a, b) {
   return a.length === b.length && a.every((v, i) => v === b[i]);
 }
 
-function toggleAdvancedSettings() {
-  const panel = document.getElementById("advancedSettings");
-  panel.classList.toggle("show");
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   // Set random background on page load
   setRandomBackground();
@@ -508,24 +507,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   const defaults = {
     category: "__RANDOM__",
     difficulty: "easy",
-    width: 10,
-    height: 10,
     count: 4
   };
 
   const restored = loadConfig("wordsearch", defaults);
   document.getElementById("categorySelect").value = restored.category;
   document.getElementById("difficultySelect").value = restored.difficulty;
-  document.getElementById("gridWidth").value = restored.width;
-  document.getElementById("gridHeight").value = restored.height;
-  document.getElementById("wordCount").value = restored.count;
+  
+  // Ensure word count doesn't exceed 10
+  const restoredCount = Math.min(restored.count || 4, 10);
+  document.getElementById("wordCount").value = restoredCount;
 
   // Initialize audio
   initAudio();
 
   // Event listeners
   document.getElementById("startButton")?.addEventListener("click", initGame);
-  document.getElementById("toggleAdvanced")?.addEventListener("click", toggleAdvancedSettings);
   document.getElementById("hintButton")?.addEventListener("click", giveHint);
   document.getElementById("audioToggle")?.addEventListener("click", toggleAudio);
   document.getElementById("backToHome")?.addEventListener("click", () => {

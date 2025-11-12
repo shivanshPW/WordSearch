@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">🌙 Word Search</title>
+  <link rel="stylesheet" href="../Shared/base.css" />
+  <link rel="stylesheet" href="../Shared/victoryScreen.css" />
+  <link rel="stylesheet" href="wordsearch.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <h1 data-i18n="title">🌙 Word Search</h1>
+  </header>
+
+  <fieldset class="settings-panel">
+    <legend data-i18n="settingsLegend">Settings</legend>
+
+    <!-- CATEGORY -->
+    <label for="categorySelect" data-i18n="category"></label>
+    <select id="categorySelect"></select>
+
+    <!-- DIFFICULTY -->
+    <label for="difficultySelect" data-i18n="difficulty"></label>
+    <select id="difficultySelect">
+      <option value="easy" data-i18n="easy"></option>
+      <option value="medium" data-i18n="medium"></option>
+      <option value="hard" data-i18n="hard"></option>
+    </select>
+
+    <!-- WORD COUNT -->
+    <label for="wordCount" data-i18n="wordCount"></label>
+    <input type="number" id="wordCount" value="4" min="1" max="50" />
+
+    <!-- CONTROLS -->
+    <div class="flex">
+      <button id="startButton" data-i18n="start"></button>
+      <button id="toggleAdvanced" data-i18n="settings">⚙️</button>
+    </div>
+
+    <!-- ADVANCED SETTINGS -->
+    <div id="advancedSettings">
+      <label for="gridWidth" data-i18n="width"></label>
+      <input type="number" id="gridWidth" value="10" min="5" max="30" />
+
+      <label for="gridHeight" data-i18n="height"></label>
+      <input type="number" id="gridHeight" value="10" min="5" max="30" />
+    </div>
+  </fieldset>
+
+  <div id="gameWrapper">
+    <div class="side-list">
+      <h3 data-i18n="toFind"></h3>
+      <div id="wordListToFind"></div>
+      <div id="hintControls" style="display: none;">
+        <button id="hintButton" data-i18n="hint"></button>
+      </div>
+    </div>
+
+    <div id="gridContainer">
+      <div id="grid"></div>
+    </div>
+  </div>
+
+  <div id="victoryScreen">
+    <canvas id="confettiCanvas"></canvas>
+    <div id="victoryMessage">🎉 You won! 🎉</div>
+    <button id="skipVictory">⏭️</button>
+  </div>
+
+  <script type="module" src="wordsearch.js"></script>
+</body>
+</html>

@@ -375,12 +375,17 @@ function initGame() {
   gridWidth = 10;
   gridHeight = 10;
 
-  // Limit word count to maximum 10
+  // Validate word count - must be between 1 and 10
   let count = parseInt(wordCountInput.value);
-  if (count > 10) {
-    count = 10;
-    wordCountInput.value = 10;
+  if (count > 10 || count < 1) {
+    wordCountInput.classList.add('invalid');
+    const message = translations[currentLang]?.maxWords || 
+                   "Maximum 10 words allowed! Please enter a number between 1 and 10.";
+    alert(message);
+    return; // Prevent game from starting
   }
+  
+  wordCountInput.classList.remove('invalid');
   wordCount = count;
 
   const settings = {
@@ -525,6 +530,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("startButton")?.addEventListener("click", initGame);
   document.getElementById("hintButton")?.addEventListener("click", giveHint);
   document.getElementById("audioToggle")?.addEventListener("click", toggleAudio);
+  
+  // Add real-time validation for word count input
+  document.getElementById("wordCount")?.addEventListener("input", (e) => {
+    const value = parseInt(e.target.value);
+    if (value > 10 || value < 1 || isNaN(value)) {
+      e.target.classList.add('invalid');
+    } else {
+      e.target.classList.remove('invalid');
+    }
+  });
+  
   document.getElementById("backToHome")?.addEventListener("click", () => {
     if (confirm(translations[currentLang].confirmExit || "Are you sure you want to exit the game?")) {
       switchScreen('home');

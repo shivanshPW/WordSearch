@@ -12,6 +12,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  transition: background 1s ease-in-out;
 }
 
 /* ===== SCREEN TRANSITIONS ===== */
@@ -236,7 +237,7 @@ body {
 /* ===== GAME SCREEN ===== */
 #gameScreen {
   padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: transparent;
 }
 
 .game-header {

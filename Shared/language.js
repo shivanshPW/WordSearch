@@ -1,11 +1,7 @@
 // language.js
 
-// Set default language if none is set
-if (!localStorage.getItem('lang')) {
-  const browserLang = navigator.language.startsWith('de') ? 'de' : 'en';
-  localStorage.setItem('lang', browserLang);
-}
-export let currentLang = localStorage.getItem('lang') || 'en';
+// Always use English only
+export let currentLang = 'en';
 
 let translations = {};
 
@@ -36,51 +32,4 @@ export function translateUI() {
       opt.innerText = translations[currentLang][val];
     }
   });
-
-  updateLangButton();
 }
-
-export function toggleLanguage() {
-  currentLang = currentLang === 'en' ? 'de' : 'en';
-  localStorage.setItem('lang', currentLang);
-  console.log("[i18n] Language toggled to:", currentLang);
-  location.reload();
-}
-
-export function updateLangButton() {
-  const btn = document.getElementById('languageButton');
-  if (btn) {
-    btn.textContent = currentLang === 'en' ? '🇬🇧' : '🇩🇪';
-    console.log("[i18n] Language button updated:", btn.textContent);
-  } else {
-    console.warn("[i18n] Language button not found");
-  }
-}
-
-(async () => {
-  console.log("[i18n] language.js loaded ");
-
-  if (document.readyState === "loading") {
-    await new Promise(resolve => {
-      document.addEventListener("DOMContentLoaded", resolve, { once: true });
-    });
-  }
-
-  console.log("[i18n] DOM fully loaded");
-
-  // Don't auto-load translations here, let the main app do it
-  // await loadTranslations();
-  // translateUI();
-
-  const langBtn = document.getElementById('languageButton');
-  if (langBtn) {
-    langBtn.addEventListener('click', () => {
-      console.log("[i18n] Language button clicked");
-      toggleLanguage();
-    });
-    console.log("[i18n] Language button registered");
-  } else {
-    console.warn("[i18n] Language button not found on page load");
-  }
-})();
-

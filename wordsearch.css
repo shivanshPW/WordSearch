@@ -13,6 +13,7 @@ body {
   overflow-x: hidden;
   position: relative;
   transition: background 1s ease-in-out;
+  width: 100%;
 }
 
 /* ===== SCREEN TRANSITIONS ===== */
@@ -58,6 +59,7 @@ body {
   padding: 60px 40px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.18);
+  margin: 0 auto;
 }
 
 .game-title {
@@ -357,6 +359,7 @@ body {
   border-radius: 20px;
   padding: 30px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
 }
 
 #grid {
@@ -364,6 +367,7 @@ body {
   gap: 4px;
   width: max-content;
   margin: auto;
+  max-width: 100%;
 }
 
 .cell {
@@ -451,17 +455,24 @@ body {
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
+  .home-container {
+    padding: 40px 20px;
+    margin: 10px;
+  }
+
   .game-title {
     font-size: 2.5rem;
   }
   
   .game-subtitle {
     font-size: 1rem;
+    margin-bottom: 30px;
   }
   
   .settings-row {
     flex-direction: column;
     align-items: stretch;
+    gap: 15px;
   }
   
   .setting-item {
@@ -471,19 +482,65 @@ body {
   .play-button {
     font-size: 1.2rem;
     padding: 15px 40px;
+    margin-top: 10px;
+  }
+
+  .bottom-controls {
+    margin-top: 20px;
+    gap: 15px;
+  }
+
+  .lang-btn,
+  .audio-btn {
+    font-size: 1.5rem;
+    padding: 8px 16px;
+  }
+  
+  /* Game Screen Responsive */
+  .game-header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .game-stats {
+    width: 100%;
+    justify-content: space-around;
+    gap: 10px;
+  }
+
+  .stat-item {
+    flex: 1;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .stat-value {
+    font-size: 1.2rem;
+  }
+
+  .back-btn {
+    width: 100%;
+    text-align: center;
   }
   
   #gameWrapper {
     flex-direction: column;
+    padding: 10px;
+    gap: 20px;
   }
   
   .side-list {
     max-width: 100%;
     flex: 1 1 auto;
+    order: 2;
   }
-  
-  .game-stats {
-    gap: 15px;
+
+  #gridContainer {
+    order: 1;
+    padding: 20px 10px;
   }
   
   .cell {
@@ -491,6 +548,199 @@ body {
     font-size: 1.1em;
     min-width: 35px;
     min-height: 35px;
+  }
+
+  #grid {
+    gap: 3px;
+  }
+}
+
+/* Extra small devices (phones, less than 480px) */
+@media (max-width: 480px) {
+  .home-container {
+    padding: 30px 15px;
+    border-radius: 20px;
+  }
+
+  .game-title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+
+  .game-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+  }
+
+  .setting-item label {
+    font-size: 0.8rem;
+  }
+
+  .setting-item select,
+  .setting-item input {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  .play-button {
+    font-size: 1rem;
+    padding: 12px 30px;
+    gap: 10px;
+  }
+
+  .play-icon {
+    font-size: 1.1rem;
+  }
+
+  .lang-btn,
+  .audio-btn {
+    font-size: 1.3rem;
+    padding: 8px 12px;
+  }
+
+  /* Game Screen Extra Small */
+  #gameScreen {
+    padding: 10px;
+  }
+
+  .game-header {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .back-btn {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+  }
+
+  .stat-value {
+    font-size: 1rem;
+  }
+
+  .side-list {
+    padding: 15px;
+  }
+
+  .side-list h3 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .word-entry {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  #gridContainer {
+    padding: 15px 5px;
+  }
+
+  .cell {
+    padding: 6px;
+    font-size: 1em;
+    min-width: 30px;
+    min-height: 30px;
+  }
+
+  #grid {
+    gap: 2px;
+  }
+
+  .hint-btn {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-height: 600px) and (orientation: landscape) {
+  .home-container {
+    padding: 20px 30px;
+    max-width: 90%;
+  }
+
+  .game-title {
+    font-size: 2rem;
+    margin-bottom: 5px;
+  }
+
+  .game-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  .settings-row {
+    margin-bottom: 15px;
+  }
+
+  .play-button {
+    margin-top: 10px;
+    padding: 12px 40px;
+  }
+
+  .bottom-controls {
+    margin-top: 15px;
+  }
+
+  #gameWrapper {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .side-list {
+    order: 1;
+    max-width: 200px;
+    flex: 0 0 180px;
+  }
+
+  #gridContainer {
+    order: 2;
+  }
+}
+
+/* Tablets (portrait) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .home-container {
+    max-width: 700px;
+    padding: 50px 35px;
+  }
+
+  .game-title {
+    font-size: 3.5rem;
+  }
+
+  .settings-row {
+    gap: 15px;
+  }
+
+  .cell {
+    padding: 10px;
+    font-size: 1.2em;
+    min-width: 38px;
+    min-height: 38px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+  .home-container {
+    max-width: 900px;
+    padding: 70px 50px;
+  }
+
+  .game-title {
+    font-size: 4.5rem;
+  }
+
+  .cell {
+    padding: 14px;
+    font-size: 1.4em;
+    min-width: 45px;
+    min-height: 45px;
   }
 }
 

@@ -166,7 +166,7 @@ function randomLetter() {
 
 function drawGrid() {
   const gridDiv = document.getElementById("grid");
-  gridDiv.style.gridTemplateColumns = `repeat(${gridWidth}, 35px)`;
+  gridDiv.style.gridTemplateColumns = `repeat(${gridWidth}, 1fr)`;
   gridDiv.innerHTML = "";
 
   for (let y = 0; y < gridHeight; y++) {

@@ -355,21 +355,24 @@ body {
   flex-grow: 1;
   display: flex;
   justify-content: center;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: auto;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 30px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   max-width: 100%;
+  width: 100%;
 }
 
 #grid {
   display: grid;
-  gap: 4px;
-  width: max-content;
+  gap: 12px;
+  width: 100%;
+  max-width: min(600px, 100%);
   margin: auto;
-  max-width: 100%;
+  aspect-ratio: 1;
 }
 
 .cell {
@@ -556,7 +559,7 @@ body {
   }
 
   #grid {
-    gap: 3px;
+    gap: 8px;
   }
 }
 
@@ -645,18 +648,18 @@ body {
   }
 
   #gridContainer {
-    padding: 15px 5px;
+    padding: 10px 5px;
   }
 
   .cell {
-    padding: 6px;
-    font-size: 1em;
-    min-width: 30px;
-    min-height: 30px;
+    padding: 4px;
+    font-size: 0.9em;
+    min-width: 26px;
+    min-height: 26px;
   }
 
   #grid {
-    gap: 2px;
+    gap: 4px;
   }
 
   .hint-btn {

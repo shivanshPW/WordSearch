@@ -501,6 +501,38 @@ function arraysEqual(a, b) {
   return a.length === b.length && a.every((v, i) => v === b[i]);
 }
 
+function showConfirmModal(callback) {
+  const modal = document.getElementById('confirmModal');
+  const yesBtn = document.getElementById('confirmYes');
+  const noBtn = document.getElementById('confirmNo');
+  
+  modal.classList.add('show');
+  
+  const handleYes = () => {
+    modal.classList.remove('show');
+    yesBtn.removeEventListener('click', handleYes);
+    noBtn.removeEventListener('click', handleNo);
+    callback(true);
+  };
+  
+  const handleNo = () => {
+    modal.classList.remove('show');
+    yesBtn.removeEventListener('click', handleYes);
+    noBtn.removeEventListener('click', handleNo);
+    callback(false);
+  };
+  
+  yesBtn.addEventListener('click', handleYes);
+  noBtn.addEventListener('click', handleNo);
+  
+  // Close on backdrop click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      handleNo();
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   // Set random background on page load
   setRandomBackground();
@@ -542,9 +574,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
   
   document.getElementById("backToHome")?.addEventListener("click", () => {
-    if (confirm(translations[currentLang].confirmExit || "Are you sure you want to exit the game?")) {
-      switchScreen('home');
-    }
+    showConfirmModal((confirmed) => {
+      if (confirmed) {
+        switchScreen('home');
+      }
+    });
   });
   
   // Make sure home screen is shown initially
